@@ -3,7 +3,7 @@ import os
 import random
 from collections import defaultdict
 from collections.abc import Iterable
-from typing import Optional, Sequence, Union
+from typing import Optional, Sequence, Union, Iterable
 
 import numpy as np
 import unidecode
@@ -113,6 +113,16 @@ def read_torch_text_labels(dataset: list, indices: Sequence[int]) -> tuple:
             text_list.append(row[1])
 
     return text_list, label_list
+
+
+def retrieve_text_labels(dataset_iter: Iterable) -> tuple:
+    texts = []
+    labels = []
+    for lab, txt in dataset_iter:
+        labels.append(lab)
+        texts.append(txt)
+
+    return (np.array(texts), np.array(labels))
 
 
 def load_20news() -> tuple:

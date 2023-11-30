@@ -211,9 +211,7 @@ if __name__ == "__main__":
             )
     else:
         train_pair, test_pair = dataset_pair[0], dataset_pair[1]
-        test_data, test_labels = read_torch_text_labels(
-            test_pair, range(len(test_pair))
-        )
+        test_data, test_labels = retrieve_text_labels(test_pair)
     if not args.all_train:
         if args.test_idx_fn is not None or args.test_idx_start is not None:
             train_idx = np.load(train_idx_fn + ".npy")
@@ -226,9 +224,7 @@ if __name__ == "__main__":
             )
     else:
         train_pair, test_pair = dataset_pair[0], dataset_pair[1]
-        train_data, train_labels = read_torch_text_labels(
-            train_pair, range(len(train_pair))
-        )
+        train_data, train_labels = retrieve_text_labels(train_pair)
     if not args.record:
         non_neural_knn_exp(
             args.compressor,
