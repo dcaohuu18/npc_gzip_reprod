@@ -12,7 +12,6 @@ from torchtext.datasets import (
     IMDB,
     AmazonReviewPolarity,
     DBpedia,
-    SogouNews,
     YahooAnswers,
     YelpReviewPolarity,
 )
@@ -43,16 +42,16 @@ def non_neural_knn_exp(
                 test_data,
                 test_label,
             )
-        print(
-            "accuracy:{}".format(
-                np.average(np.array(pred_correct_pair, dtype=np.int32)[:, 1])
-            )
-        )
+        accuracy = np.average(np.array(pred_correct_pair, dtype=np.int32)[:, 1])
+        print("accuracy:{}".format(accuracy))
+
         # print('accuracy:{}'.format(np.average(np.array(pred_correct_pair, dtype=np.object_)[:, 1])))
     else:
         knn_exp_ins.calc_dis(test_data, train_data=train_data)
-        knn_exp_ins.calc_acc(k, test_label, train_label=train_label)
+        _, correct = knn_exp_ins.calc_acc(k, test_label, train_label=train_label)
+        accuracy = sum(correct)/len(correct)
     print("spent: {}".format(time.time() - start))
+    return accuracy
 
 
 def record_distance(
@@ -164,6 +163,7 @@ if __name__ == "__main__":
         "swahili",
         "filipino",
         "kirnews",
+        "SogouNews",
         "custom",
     ]:
         dataset_pair = eval(args.dataset)(root=args.data_dir)

@@ -546,7 +546,7 @@ def load_custom_dataset(directory: str, delimiter: str = "\t") -> tuple:
         pairs = []
         text_list = open(filename).read().strip().split("\n")
         for t in text_list:
-            label, text = t.split(delimiter)
+            label, text = t.split(delimiter, maxsplit=1)
             pairs.append((label, text))
         return pairs
 
