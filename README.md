@@ -1,3 +1,9 @@
+🔴 This is an attempt to reproduce the paper: *“Low-Resource” Text Classification: A Parameter-Free Classification Method with Compressors*. This repository was cloned from https://github.com/bazingagin/npc_gzip.
+
+🔴 Most of the modifications took place in the `original_codebase` folder. The instruction for running the code can be found below.
+
+---
+
 # Code for Paper: “Low-Resource” Text Classification: A Parameter-Free Classification Method with Compressors
 
 This paper is accepted to Findings of [ACL2023](https://aclanthology.org/2023.findings-acl.426/).
@@ -36,7 +42,7 @@ See `requirements.txt`.
 Install requirements in a clean environment:
 
 ```sh
-conda create -n npc python=3.7
+conda create -n npc python=3.8
 conda activate npc
 pip install -r requirements.txt
 ```
@@ -54,7 +60,7 @@ By default, this will only use 100 test and training samples per class as a quic
 --dataset <AG_NEWS, SogouNews, DBpedia, YahooAnswers, 20News, Ohsumed_single, R8, R52, kinnews, kirnews, swahili, filipino> [Note that for small datasets like kinnews, default 100-shot is too big, need to set --num_test and --num_train.]
 --num_train <INT>
 --num_test <INT>
---data_dir <DIR> [This needs to be specified for R8, R52 and Ohsumed.]
+--data_dir <DIR> [This needs to be specified for R8, R52, Ohsumed, and truncated SogouNews.]
 --all_test [This will use the whole test dataset.]
 --all_train
 --record [This will record the distance matrix in order to save for the future use. It's helpful when you when to run on the whole dataset.]
@@ -63,6 +69,8 @@ By default, this will only use 100 test and training samples per class as a quic
 --para [This will use multiprocessing to accelerate.]
 --output_dir <DIR> [The output directory to save information of tested indices or distance matrix.]
 ```
+
+🔴 🆕 The SogouNews dataset may be too large to fit on your RAM. You can try using this truncated version created by me: https://drive.google.com/drive/folders/1edsT6h5ir5b_l6HPM8kXorVo2g08tuyT?usp=sharing. Download the files and specify the `data_dir` where they're stored.
 
 #### Calculate Accuracy (Optional)
 
